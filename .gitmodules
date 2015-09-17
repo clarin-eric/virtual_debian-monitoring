@@ -1,0 +1,4 @@
+[submodule "resources/srv/monitoring"]
+	path = resources/srv/monitoring
+	url = https://github.com/clarin-eric/monitoring
+	branch = master

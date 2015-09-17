@@ -1,0 +1,50 @@
+== To build
+
+* Clone this repository (once).
+* `cd` to its root directory.
+* Retrieve the submodules under `resources/` (once):
++
+[source,Sh]
+----
+git submodule update --init --recursive
+----
++
+[source,Sh]
+----
+packer build 'packer.json'
+----
+* To pull in the latest revisions (on the `master` branch) of the submodules, issue:
++
+[source,Sh]
+----
+sudo -E env GIT_SSH_COMMAND="sudo -u '#'$(id -u) ssh" git submodule update --recursive --remote
+----
+* `cd` back to your local repository copy's root directory.
+* Build the virtualized application, by issuing:
++
+[source,Sh]
+----
+packer build 'packer.json'
+----
+
+== To configure
+
+[source,Sh]
+----
+docker create \
+    --entrypoint='/bin/bash' \
+    --interactive=true \
+    --name='debian-monitoring-latest' \
+    --tty=true \
+    --volume="$(realpath resources/srv/):/srv/" \
+    'docker.clarin.eu/debian-monitoring:latest'
+----
+
+== To run
+
+[source,Sh]
+----
+docker start \
+    --attach=true \
+    'debian-monitoring-latest'
+----

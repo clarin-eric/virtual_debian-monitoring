@@ -1,0 +1,33 @@
+{
+    "builders": [
+        {
+            "export_path": "{{template_dir}}/images/latest.tar",
+            "image": "debian:8.2",
+            "run_command": [
+                "-d",
+                "-i",
+                "-t",
+                "{{.Image}}",
+                "/bin/sh"
+            ],
+            "pull": false,
+            "type": "docker",
+            "volumes": {"{{template_dir}}/resources/srv/": "/srv/"}
+        }
+    ],
+    "post-processors": [
+        {
+            "repository": "docker.clarin.eu/debian-monitoring",
+            "tag": "latest",
+            "type": "docker-import"
+        }
+    ],
+    "provisioners": [
+        {
+            "scripts": [
+                "{{template_dir}}/provision.sh"
+            ],
+            "type": "shell"
+        }
+    ]
+}
