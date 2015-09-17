@@ -12,4 +12,4 @@ before_install:
   - docker start 'debian-monitoring-latest'
 
 script:
-  - cd '/srv/' && ./test.sh
+  - ls -lah '/srv/' && cd '/srv/' && ./test.sh
