@@ -9,10 +9,6 @@
 git submodule update --init --recursive
 ----
 +
-[source,Sh]
-----
-packer build 'packer.json'
-----
 * To pull in the latest revisions (on the `master` branch) of the submodules, issue:
 +
 [source,Sh]
