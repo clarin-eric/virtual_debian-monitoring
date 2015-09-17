@@ -42,9 +42,7 @@ docker create \
 
 [source,Sh]
 ----
-docker start \
-    --attach=true \
-    'debian-monitoring-latest'
+docker start 'debian-monitoring-latest'
 ----
 
 == To test
