@@ -1,3 +1,5 @@
+This virtualized application/service consists of the CLARIN monitoring setup. This repository can be used to build e.g. a Docker container image.
+
 == To build
 
 * Clone this repository (once).
@@ -47,4 +49,4 @@ docker start \
 
 == To test
 
-Execute link:resources/srv/test.sh[`resources/srv/test.sh`]. This script file is mapped to `/srv/test.sh` within the container by default.
+Travis CI pulls this Docker container image from the CLARIN Docker Registry, and then performs the tests by executing link:resources/srv/test.sh[`resources/srv/test.sh`]. This script file is mapped to `/srv/test.sh` within the container by default.
