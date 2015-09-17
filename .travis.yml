@@ -5,11 +5,10 @@ language: python
 services:
   - docker
 
-before_install:
+install:
   - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" 'https://docker.clarin.eu/'
   - docker pull 'docker.clarin.eu/debian-monitoring:latest'
-  - docker create --name='debian-monitoring-latest' --volume="$(readlink -f 'resources/srv/'):/srv/" --entrypoint='/bin/sh' 'docker.clarin.eu/debian-monitoring:latest'
-  - docker start 'debian-monitoring-latest'
+  - docker create --name='debian-monitoring-latest' --volume="$(readlink -f 'resources/srv/'):/srv/" --entrypoint='/bin/sh' 'docker.clarin.eu/debian-monitoring:latest' -c 'cd "/srv/" && ./test.sh'
 
 script:
-  - ls -lah '/srv/' && cd '/srv/' && ./test.sh
+  - docker start 'debian-monitoring-latest'
