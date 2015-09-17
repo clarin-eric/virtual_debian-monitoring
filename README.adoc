@@ -2,7 +2,7 @@
 
 * Clone this repository (once).
 * `cd` to its root directory.
-* Retrieve the submodules under `resources/` (once):
+* Retrieve the submodules under link:resources/[`resources/`] (once):
 +
 [source,Sh]
 ----
@@ -44,3 +44,7 @@ docker start \
     --attach=true \
     'debian-monitoring-latest'
 ----
+
+== To test
+
+Execute link:resources/srv/test.sh[`resources/srv/test.sh`]. This script file is mapped to `/srv/test.sh` within the container by default.
