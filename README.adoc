@@ -34,7 +34,7 @@ docker create \
     --interactive=true \
     --name='debian-monitoring-latest' \
     --tty=true \
-    --volume="$(realpath resources/srv/):/srv/" \
+    --volume="$(readlink -f 'resources/srv/'):/srv/" \
     'docker.clarin.eu/debian-monitoring:latest'
 ----
 
