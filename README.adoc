@@ -1,37 +1,28 @@
-This virtualized application/service consists of the CLARIN monitoring setup. This repository can be used to build e.g. a Docker container image.
+This virtualized application/service consists of the CLARIN monitoring setup. This repository can be used to build e.g. a Docker container image. The dependencies and other resources are under link:resources/[`resources/`].
+
+== Requirements
+
+* https://packer.io[Packer].
+* https://www.docker.com/[Docker].
+
+=== Suggested requirements
+
+* The `readlink` command-line utility, offered by http://www.gnu.org/software/coreutils/coreutils.html[GNU coreutils].
+* https://www.sudo.ws/[`sudo`].
 
 == To build
 
-* Clone this repository (once).
-* `cd` to its root directory.
-* Retrieve the submodules under link:resources/[`resources/`] (once):
-+
-[source,Sh]
-----
-git submodule update --init --recursive
-----
-+
-* To pull in the latest revisions (on the `master` branch) of the submodules, issue:
-+
-[source,Sh]
-----
-sudo -E env GIT_SSH_COMMAND="sudo -u '#'$(id -u) ssh" git submodule update --recursive --remote
-----
-* `cd` back to your local repository copy's root directory.
-* Build the virtualized application, by issuing:
-+
-[source,Sh]
-----
-packer build 'packer.json'
-----
+* Follow this https://github.com/sanmai-NL/guide_on_submodules[brief guide on submodules] to learn how to manage dependency submodules, if you do not know it already. Complete https://github.com/sanmai-NL/recursive_packer_build/blob/master/Project_dependencies_as_Git_submodules.adoc#getting-started-with-a-git-repository-that-has-submodules[the recursive clone] or submodule initialization of this repository.
+* Complete a https://github.com/sanmai-NL/recursive_packer_build#to-use[recursive Packer build].
 
 == To configure
 
+* First make sure your current working directory is the root directory of your local copy of this repository, and that the previously described build process has completed successfully.
+* Then issue:
 [source,Sh]
 ----
 docker create \
     --entrypoint='/bin/bash' \
-    --interactive=true \
     --name='debian-monitoring-latest' \
     --tty=true \
     --volume="$(readlink -f 'resources/srv/'):/srv/" \
